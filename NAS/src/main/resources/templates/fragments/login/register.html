@@ -1,0 +1,61 @@
+<div id="regisgerDiv" xmlns:th="http://www.thymeleaf.org" th:fragment="register" class="container">
+    <div class="card bg-light loginCentered">
+        <article class="card-body">
+            <h4 class="card-title mt-3 text-center" th:text="#{register.create_account}"></h4>
+            <p class="text-center" th:text="#{register.get_started}"></p>
+
+            <hr>
+
+            <form id="registerForm" method="POST" action="/register">
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-user"></i></span>
+                    </div>
+                    <input name="name" class="form-control" th:placeholder="#{register.placeholder_name}" type="text" required/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i
+                            class="fas fa-envelope"></i></span></div>
+                    <input name="email" class="form-control" th:placeholder="#{register.placeholder_email}" type="email" required/>
+                </div>
+
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-lock"></i></span>
+                    </div>
+                    <input id="password1" name="password1" class="form-control" th:placeholder="#{register.placeholder_password1}"
+                           type="password" required/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i class="fas fa-lock"></i></span>
+                    </div>
+                    <input name="password2" class="form-control" th:placeholder="#{register.placeholder_password2}"
+                           type="password" required/>
+                </div>
+
+                <div>
+                    <p><span id="errorMessage" style="color: red; "></span></p>
+                </div>
+
+                <div class="form-group">
+                    <button id="registerButton" type="submit" class="btn btn-primary btn-block"
+                            th:text="#{register.button_register}"></button>
+                </div>
+
+                <p class="text-center">
+                    <a th:text="#{register.have_account}"></a>
+                    <a id="login" href="/login" th:text="#{register.sign_in}"></a>
+                </p>
+            </form>
+        </article>
+    </div>
+    <!-- Modal -->
+    <div th:replace="fragments/login/modal.html::modal"></div>
+
+    <script>
+        document.getElementById('sentEmailModalLabel').innerHTML = "Activate your account";
+        document.getElementById('modalDescription').innerHTML = "An email was sent to your address. Check it and log in!";
+    </script>
+</div>

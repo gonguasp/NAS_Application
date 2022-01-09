@@ -1,0 +1,36 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="modal">
+    <div class="modal fade" id="sentEmailModal" tabindex="-1"
+         role="dialog" aria-labelledby="sentEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sentEmailModalLabel" th:text="#{forgot_password.modal.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalDescription" class="modal-body" th:text="#{forgot_password.modal.info}"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" th:text="#{forgot_password.modal.ok_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="errorModal" tabindex="-1"
+         role="dialog" aria-labelledby="sentEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="#{forgot_password.modal.error}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" th:text="#{forgot_password.modal.error_info}"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" th:text="#{forgot_password.modal.ok_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

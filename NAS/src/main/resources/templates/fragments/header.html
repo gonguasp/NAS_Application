@@ -1,0 +1,58 @@
+<div id="header" class="stickyNav" xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>NAS</title>
+        <link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="/webjars/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+        <link sec:authorize="isAuthenticated()" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+        <link sec:authorize="isAuthenticated()" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+        <link href="/css/styles.css" rel="stylesheet" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css" rel="stylesheet"/>
+    </head>
+
+    <!--/*@thymesVar id="language" type="java.lang.String"*/-->
+    <input id="language" type="hidden" th:value="${language}"/>
+
+    <nav class="navbar-expand-lg navbar-light ">
+        <div class="bg-light">
+            <div class="collapse navbar-collapse" id="navbarText" style="height: 40px">
+                <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
+                    <li class="nav-item" onclick="reloadWelcomePage();">
+                        <span class="linkNav text-dark" style="cursor:pointer"><i class="fas fa-home"></i><span th:text="' ' + #{navbar.home}"></span></span>
+                    </li>
+                    <li class="nav-item" onclick="reloadDownloadPage();">
+                        <span class="linkNav text-dark" style="cursor:pointer"><i class="fas fa-cloud"></i><span th:text="' ' + #{navbar.cloud}"></span></span>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item" onclick="showSettingsView();">
+                        <span class="linkNav text-dark" style="cursor:pointer"><i class="fas fa-cog"></i><span th:text="' ' + #{navbar.settings}"></span></span>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()"></ul>
+                <div class="dropdown">
+                    <span class="nav-link dropdown-toggle linkNav text-dark" type="button" id="navbarDropdownLanguageLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-globe"></i>
+                    </span>
+                    <div class="dropdown-menu bg-primary dropdown-menu-right" aria-labelledby="navbarDropdownLanguageLink">
+                        <a class="dropdown-item active menuOption" href="#" style="color: black;" onclick="changeLanguage('english')"><span class="flag-icon flag-icon-gb"></span>&nbsp;<span th:text="#{lang_english}"></span></a>
+                        <a class="dropdown-item active menuOption" href="#" style="color: black;" onclick="changeLanguage('spanish')"><span class="flag-icon flag-icon-es"></span>&nbsp;<span th:text="#{lang_spanish}"></span></a>
+                    </div>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="dropdown">
+                    <span class="nav-link dropdown-toggle linkNav text-dark" type="button" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </span>
+                    <div class="dropdown-menu bg-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item active menuOption" href="#" style="color: black;" onclick="showResetPasswordView()" th:text="#{navbar.change_password}"></a>
+                        <a class="dropdown-item active menuOption" href="#" style="color: black;" onclick="changeTheme(true)" th:text="#{navbar.change_theme}"></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item active menuOption" href="/logout" style="color: black;"><i class="fas fa-sign-out-alt"></i><span th:text="' ' + #{navbar.logout}"></span></a>
+                    </div>
+                </div>
+                <div style="width: 10px;"></div>
+            </div>
+        </div>
+        <div id="contrastNavbar" style="height: 3px;" class="dark"></div>
+    </nav>
+
+</div>

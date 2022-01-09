@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Responsive email</title>
+        <style>
+            .centered{
+                text-align: center;
+            }
+            .rounded{
+                border-radius: 5px;
+            }
+            body{
+                margin: 0%;
+                padding: 0%;
+            }
+            .outer-panel{
+                width: 100%;
+                padding: 0% 7%;
+                background-color: rgba(0,0,0,0.059);
+            }
+            .container{
+                display: flex;
+                justify-content: center;
+                margin-left: 12%;
+                margin-right: 12%;
+            }
+            .inner-panel{
+                background-color: rgba(255,255,255,0.55);
+                box-shadow: 1px 2px 10px rgba(0,0,0,0.34);;
+            }
+            p{
+                font-size: 12px;
+            }
+            .circle{
+                width: 40px;
+                height: 40px;
+                border-radius: 100px;
+                margin: 2%;
+                border: 1px solid rgba(0,0,0,0.55);
+                text-align: center;
+                padding-top: 11px;
+            }
+            .button {
+                background-color: #FFC200;
+                border: none;
+                color: black;
+                padding: 10px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 13px !important;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="outer-panel rounded">
+                <div class="inner-panel rounded">
+                    <div >
+                        <div class="centered" style="padding-bottom: 10px">
+                            <p style="padding-top: 1px;">
+                                <h2>Activate your account</h2>
+                                Confirm your email address
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <img src="imagen.png" alt="Image1" style="width: 100%; height: 90%;">
+                        </div>
+
+                        <div class="centered">
+                            <p>
+                                Hi! When you confirm your email address, you will be the newest member in NAS.
+                            </p>
+                            <a href="{:1}"><button type="button" class="button">Activate your account!</button></a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div >
+                        <div>
+                            <div class="centered" style="padding-top: 20px">
+                                imagen 1
+                            </div>
+                        </div>
+                        <div>
+                            <div class="centered">                            
+                                <p>
+                                    <h3>Upload all</h3>
+                                    Upload all the data you like, you put the limit!
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="centered" style="padding-top: 20px">
+                                imagen 2
+                            </div>
+                        </div>
+                        <div>
+                            <div class="centered" style="padding-bottom: 10px">
+                                <p>
+                                    <h3>Download as you like</h3>
+                                    You can download all the files uploaded in your account.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="centered">
+                    <div>
+                        <footer style="padding: 3% 19%">
+                            <p>
+                            Send by probably your house IT administrator.
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

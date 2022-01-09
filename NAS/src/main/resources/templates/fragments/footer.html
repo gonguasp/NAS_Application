@@ -1,0 +1,24 @@
+<div id="footer" style="display: table-footer-group;" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" th:fragment="footer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script sec:authorize="isAuthenticated()" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script sec:authorize="isAuthenticated()" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script sec:authorize="isAuthenticated()" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+    <script sec:authorize="isAuthenticated()" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script sec:authorize="isAnonymous()" src="/js/preAuthentication.js"></script>
+    <script sec:authorize="isAuthenticated()" src="/js/nav.js"></script>
+    <script sec:authorize="isAuthenticated()" src="/js/downloadFiles.js"></script>
+    <script sec:authorize="isAuthenticated()" src="/js/uploadFiles.js"></script>
+    <script src="/js/resetPassword.js"></script>
+    <script sec:authorize="isAuthenticated()" src="/js/welcome.js"></script>
+    <script sec:authorize="hasRole('ROLE_ADMIN')" src="/js/settings.js"></script>
+
+    <div sec:authorize="isAuthenticated()" class="bg-light">
+        <div id="contrastFooter" style="height: 3px;" class="dark"></div>
+        <div class="text-dark" style="text-align: center;">
+            <span><i class="fas fa-registered"></i><span th:text="' ' + #{footer.registered} + ' '"></span><a href="http://www.google.es"><span th:text="#{footer.github} + ' '"></span><i class="fab fa-github"></i></a><span th:text="' ' + #{footer.license}"></span></span>
+        </div>
+    </div>
+</div>

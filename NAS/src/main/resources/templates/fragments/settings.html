@@ -1,0 +1,89 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org" th:fragment="settings">
+    <!--/*@thymesVar id="uploadservice" type="java.lang.String"*/-->
+    <input id="uploadUrlService" type="hidden" th:value="${uploadservice}"/>
+    <!--/*@thymesVar id="downloadservice" type="java.lang.String"*/-->
+    <input id="downloadUrlService" type="hidden" th:value="${downloadservice}"/>
+    <!--/*@thymesVar id="jwt" type="java.lang.String"*/-->
+    <input id="jwt" type="hidden" th:value="${jwt}"/>
+
+    <div id="settingsDiv">
+        <div class="tableButtonsDiv" id="tableButtons">
+            <button id="resetPasswords" type="button" disabled class="btn btn-outline-warning tableButton" style="pointer-events: none" onclick="confirmResetPasswords()"><i class="fas fa-share-alt"></i><span th:text="' ' + #{settings_view.reset_password}"></span></button>
+            <button id="deleteUsers" type="button" disabled class="btn btn-outline-danger tableButton" style="pointer-events: none" onclick="confirmDeletes()"><i class="fas fa-trash-alt"></i><span th:text="' ' + #{settings_view.delete}"></span></button>
+        </div>
+        <table id="usersTable" class="table table-hover" style="width:100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th th:text="#{settings_view.table.type}">Type</th>
+                <th class="text-dark" th:text="#{settings_view.table.email}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.created}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.modified}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.size}"></th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th></th>
+                <th th:text="#{settings_view.table.type}">Type</th>
+                <th class="text-dark" th:text="#{settings_view.table.email}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.created}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.modified}"></th>
+                <th class="text-dark" th:text="#{settings_view.table.size}"></th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="modal fade" id="resetFolderModal" tabindex="-1" role="dialog" aria-labelledby="deleteTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="resetTitleModalLabel" th:text="#{settings_view.modal.reset_password.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="form-group">
+                        <div id="resetFolderBody">
+                            <p id="resetPasswordInfo"></p>
+                            <input id="inputResetFolder" th:placeholder="#{settings_view.modal.reset_password.placeholder}" oninput="checkResetText(this)" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{settings_view.modal.reset_password.close_button}"></button>
+                    <button disabled name="okResetButton" style="pointer-events: none" type="button" data-dismiss="modal" onclick="modifyUsers('PATCH')" class="btn btn-warning" th:text="#{settings_view.modal.reset_password.reset_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteFolderModal" tabindex="-1" role="dialog" aria-labelledby="deleteTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="deleteTitleModalLabel" th:text="#{settings_view.modal.delete_user.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="form-group">
+                        <div id="deleteFolderBody">
+                            <p id="resetDeleteInfo"></p>
+                            <input id="inputDeleteFolder" th:placeholder="#{settings_view.modal.delete_user.placeholder}" oninput="checkDeleteText(this)" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{settings_view.modal.delete_user.close_button}"></button>
+                    <button disabled name="okDeleteFilesFolderButton" style="pointer-events: none" type="button" onclick="modifyUsers('DELETE');" class="btn btn-danger" th:text="#{settings_view.modal.delete_user.delete_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

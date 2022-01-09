@@ -1,0 +1,35 @@
+<div id="loginDiv" xmlns:th="http://www.thymeleaf.org" th:fragment="login" class="container">
+    <div class="card bg-light loginCentered">
+        <article class="card-body">
+            <a id="register" href="/register" class="float-right btn btn-outline-primary" th:text="#{login.sign_up}"></a>
+            <h4 class="card-title mb-4 mt-1" th:text="#{login.sign_in}"></h4>
+            <p>
+                <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</a>
+                <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via
+                    Facebook</a>
+            </p>
+            <hr>
+            <form id="loginForm" method="POST" action="/login">
+                <div class="form-group">
+                    <input name="username" class="form-control" th:placeholder="#{login.placeholder_email}" type="email" required>
+                </div>
+                <div class="form-group">
+                    <input name="password" class="form-control" placeholder="******" type="password" required>
+                </div>
+                <div>
+                    <p><span id="errorLoginMessage" style="color: red; "></span></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button id="loginButton" type="submit" class="btn btn-primary btn-block" th:text="#{login.login}"></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a id="forgotPassword" class="small" href="forgotPassword" th:text="#{login.forgot_password}"></a>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
+</div>    

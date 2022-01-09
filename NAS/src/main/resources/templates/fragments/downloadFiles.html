@@ -1,0 +1,62 @@
+<div id="downloadFilesContainer" xmlns:th="http://www.thymeleaf.org" th:fragment="downloadFiles" class="container">
+    <!--/*@thymesVar id="uploadservice" type="java.lang.String"*/-->
+    <input id="uploadUrlService" type="hidden" th:value="${uploadservice}"/>
+    <!--/*@thymesVar id="downloadservice" type="java.lang.String"*/-->
+    <input id="downloadUrlService" type="hidden" th:value="${downloadservice}"/>
+    <!--/*@thymesVar id="jwt" type="java.lang.String"*/-->
+    <input id="jwt" type="hidden" th:value="${jwt}"/>
+
+    <div id="fullSidenav" class="fullSidenav bg-light"></div>
+    <div id="foldersNav" class="sidenav bg-light">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div id="foldersDiv">
+            <ul style="margin: 0px; margin-bottom: 30px;">
+                <li name="wrapper">
+                    <button name="mainNewFolder" id="newFolderMainButton" class="buttonNewFolderMain btn btn-outline-success btn-sm"
+                            onclick="setMainFolder(true);" onmouseover="showButton(this)" data-toggle="modal"
+                            data-target="#newFolderModal"><span th:text="#{folder_structure.new} + ' '"></span><i class="fas fa-folder"></i></button>
+                    <a></a><a></a>
+                </li>
+            </ul>
+            <div id="mainFolders">
+                <!--/*@thymesVar id="folders" type="java.util.List"*/-->
+                <div th:each="folder: ${folders}">
+                    <ul style="margin:0px;">
+                        <li name="wrapper">
+                            <button th:name="${folder.relativePath}" onmouseover="showButton(this)"
+                                    onclick="loadFolders(this)" class="buttonFolder btn btn-outline-dark btn-sm"><i th:if="${folder.subFolder}"
+                                                                                        style="margin-right: 10px;"
+                                                                                        class="fas fa-angle-right"></i>[[${folder.name}]]
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm buttonGotoFolder" onclick="goToFolder(this);" style="display:none;"
+                                    th:name="${folder.relativePath} + '/'">
+                                <span th:text="#{folder_structure.go} + ' '"></span><i class="fas fa-external-link-alt"></i>
+                            </button>
+                            <button class="btn btn-outline-success btn-sm buttonNewFolder" onclick="setMainFolder(false);" style="display:none;"
+                                    th:name="${folder.relativePath} + '/'" data-toggle="modal" data-target="#newFolderModal">
+                                <span th:text="#{folder_structure.new} + ' '"></span><i class="fas fa-folder-plus"></i>
+                            </button>
+                            <button class="buttonDeleteFolder btn btn-outline-danger btn-sm" style="display:none;" th:name="${folder.relativePath} + '/'"
+                                    data-toggle="modal" data-target="#deleteFolderModal">
+                                <span th:text="#{folder_structure.delete} + ' '"></span><i class="fas fa-folder-minus"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/modals.html::modals"></div>
+    <div><span class="folderStructure text-dark" style="cursor:pointer" onclick="openNav()"><i class="fas fa-stream"></i><span th:text="' ' + #{download_view.folder_structure}"></span></span></div>
+    <div class="folderPathDiv text-dark" id="folderPath">/</div>
+    <div class="tableButtonsDiv" id="tableButtons">
+        <button id="newModal" type="button" class="btn btn-outline-success tableButton" onclick="newFolderFromDownloadView();" data-toggle="modal"
+                data-target="#newFolderModal"><i class="fas fa-folder"></i><span th:text="' ' + #{download_view.new}"></span></button>
+        <button id="uploadModal" type="button" class="btn btn-outline-primary tableButton" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-upload"></i><span th:text="' ' + #{download_view.upload}"></span></button>
+        <button id="download" type="button" disabled class="btn btn-outline-primary tableButton" style="pointer-events: none" onclick="downloadFilesAsZip()"><i class="fas fa-download"></i><span th:text="' ' + #{download_view.d_zip}"></span></button>
+        <button id="shareFiles" type="button" disabled class="btn btn-outline-success tableButton" style="pointer-events: none" onclick="shareFiles()"><i class="fas fa-share-alt"></i><span th:text="' ' + #{download_view.share}"></span></button>
+        <button id="deleteFiles" type="button" disabled class="btn btn-outline-danger tableButton" style="pointer-events: none" onclick="confirmDelete()"><i class="fas fa-trash-alt"></i><span th:text="' ' + #{download_view.delete}"></span></button>
+        <button id="changeName" type="button" disabled class="btn btn-outline-info tableButton" style="pointer-events: none" onclick="showChangeNameModal()"><i class="fas fa-file-signature"></i><span th:text="' ' + #{download_view.change_name}"></span></button>
+    </div>
+    <div th:replace="fragments/downloadTable.html::downloadTable"></div>
+</div>

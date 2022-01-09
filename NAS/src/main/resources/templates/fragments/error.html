@@ -1,0 +1,43 @@
+<div id="errorContainer" xmlns:th="http://www.thymeleaf.org" th:fragment="error" class="container"
+     xmlns:sec="http://www.w3.org/1999/xhtml" style="margin-top: 15%;">
+    <!--/*@thymesVar id="jwt" type="java.lang.String"*/-->
+    <input id="jwt" type="hidden" th:value="${jwt}"/>
+    <!--/*@thymesVar id="isDarkTheme" type="java.lang.String"*/-->
+    <input id="isDarkTheme" type="hidden" th:value="${isDarkTheme}"/>
+    <div class="row">
+        <div class="col-md-6 align-self-center">
+            <div th:replace="fragments/dinosaurGame.html::dinosaurGame"></div>
+        </div>
+        <div class="col-md-6 align-self-center">
+            <h1 class="text-dark" th:text="${exception.httpStatus}"></h1>
+            <h2 id="uri" class="text-dark" th:text="${exception.details}"></h2>
+            <p class="text-dark" th:text="${exception.message}"></p>
+            <div sec:authorize="isAnonymous()">
+                <a href="/login">
+                    <button class="btn btn-primary" th:text="#{error_page.login}"></button>
+                </a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a href="/welcome">
+                    <button class="btn btn-primary" th:text="#{error_page.home}"></button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script sec:authorize="isAuthenticated()">
+        window.onload = checkUri;
+
+        function checkUri() {
+            let uriElement = document.getElementById("uri");
+            if (uriElement.innerHTML == "uri=/error") {
+                uriElement.innerHTML = "uri=" + window.location.pathname;
+            }
+            window.history.pushState('', 'NAS', '/welcome');
+
+            if(document.getElementById("isDarkTheme").value == "true") {
+                changeTheme();
+            }
+        }
+    </script>
+
+</div>

@@ -1,0 +1,52 @@
+<div id="uploadFilesContainer" xmlns:th="http://www.thymeleaf.org" th:fragment="uploadFiles" class="container">
+    <div>
+        <div style="height:135px;">
+            <div id="barrasProgreso" style="display:none; padding-top:20px;">
+                <div id='uploadingFileName' class="text-dark"></div>
+                <div id='individualProgressBar' style='margin-bottom: 20px'>
+                    <div class="progress">
+                        <div id='individualBar' class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div id='progressBar' style='margin-bottom: 20px'>
+                    <div class="progress">
+                        <div id='bar' class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="uploadFilesDiv">
+            <h3 class="mx-auto text-dark" style="width:fit-content;"><span th:text="#{upload_files.modal.target}"></span><span id="targetFolder">/</span></h3>
+            <div id="info" class="w-75 mx-auto row">
+                <div class="col" style="text-align: right;">
+                    <small class="text-dark" style="display:none;" id="numFicheros"></small>
+                </div>
+            </div>
+            <div id="ficheros" class="list-group w-75 p-3 mx-auto"></div>
+            <div class="mx-auto" style="width:fit-content;">
+                <div id="multipleFilesUploadDiv">
+                    <input id="multipleFileUploadInput" type="file" style="display:none" name="files" class="file-input"
+                           multiple required onchange="handleFiles(this.files)"/>
+                </div>
+                <div id="multipleFoldesUploadDiv">
+                    <input id="multipleFolderUploadInput" type="file" style="display:none" webkitdirectory mozdirectory
+                           onchange="handleFiles(this.files)"/>
+                </div>
+                <div class="row">
+                    <a href="javascript:void(0);" onclick="doClick('multipleFileUploadInput');"><i
+                            class="fas fa-plus"></i>&nbsp<i class="fas fa-file"></i>&nbsp&nbsp<span th:text="#{upload_files.modal.add_files}"></span></a>
+                    <a style="margin-left: 12px; margin-right: 12px;"></a>
+                    <a href="javascript:void(0);" onclick="doClick('multipleFolderUploadInput');"><i
+                            class="fas fa-plus"></i>&nbsp<i class="fas fa-folder"></i>&nbsp&nbsp<span th:text="#{upload_files.modal.add_folder}"></span></a>
+                </div>
+                <p class="mx-auto" style="width:fit-content; margin-top:10px;">
+                    <button id="uploadFilesButton" onclick="uploadFiles();" disabled class="btn btn-outline-primary" th:text="#{upload_files.modal.upload_button}"></button>
+                    <button class="btn btn-outline-warning" onclick="clearUploadModal();" th:text="#{upload_files.modal.clear_all_button}"></button>
+                </p>
+            </div>
+            <div id="subidos" class="list-group w-75 p-3 mx-auto"></div>
+        </div>
+    </div>
+</div>

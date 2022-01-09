@@ -1,0 +1,162 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="modals">
+    <!-- modal subir archivos -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel" th:text="#{modal.upload_files.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="uploadFragment" class="modal-body">
+                    <div th:replace="fragments/uploadFiles.html::uploadFiles"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal crear nueva carpeta -->
+    <div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="titleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="titleModalLabel" th:text="#{modal.new_folder.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label"></label>
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"> <i
+                                    class="fas fa-folder"></i></span></div>
+                            <input th:placeholder="#{modal.new_folder.placeholder}" type="text" class="form-control" id="recipient-name">
+                            <input type="hidden" id="recipient-name-hidden">
+                            <input type="hidden" id="from-mainButton-hidden">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                    <button id="okModalButton" type="button" onclick="createNewFolder();" class="btn btn-primary">Ok
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal eliminar carpeta -->
+    <div class="modal fade" id="deleteFolderModal" tabindex="-1" role="dialog" aria-labelledby="deleteTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="deleteTitleModalLabel" th:text="#{modal.delete_folder.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="form-group">
+                        <div id="deleteFolderBody">
+                            <p th:text="#{modal.delete_folder.confirm}"></p>
+                            <input id="inputDeleteFolder" th:placeholder="#{modal.delete_folder.placeholder}" oninput="checkDeleteText(this)" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="deleteFolderPath">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                    <button disabled name="okDeleteFilesFolderButton" style="pointer-events: none" type="button" onclick="deleteFolder();" class="btn btn-danger">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal compartir archivos -->
+    <div class="modal fade" id="shareFilesModal" tabindex="-1" role="dialog" aria-labelledby="shareTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="shareFilesTitleModalLabel" th:text="#{modal.share.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label"></label>
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="shareFilesLink">
+                            <button onclick="copyToClipboard('shareFilesLink')"><i class="dodgerblue fas fa-copy"></i></button>
+                        </div>
+                        <div class="text-dark" style="text-align: center; display: none" id="copiedToClipboard" th:text="#{modal.share.copied}"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal confirmar borrado de ficheros -->
+    <div class="modal fade" id="deleteFilesModal" tabindex="-1" role="dialog" aria-labelledby="deleteFilesTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="deleteFilesTitleModalLabel" th:text="#{modal.delete_files.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="form-group">
+                        <div id="deleteFilesBody">
+                            <p id="deleteFilesInfo"></p>
+                            <input th:placeholder="#{modal.delete_folder.placeholder}" oninput="checkDeleteText(this)" type="text" class="form-control" id="deleteFilesCheck">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                    <button disabled name="okDeleteFilesFolderButton" type="button" style="pointer-events: none" onclick="deleteFiles();" class="btn btn-danger" th:text="#{modal.delete_files.delete_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal cambiar nombre archivo o carpeta -->
+    <div class="modal fade" id="changeNameModal" tabindex="-1" role="dialog" aria-labelledby="changeNameTitleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="changeNameModalLabel" th:text="#{modal.change_name.title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="form-group">
+                        <div id="changeNameBody">
+                            <p id="changeNameInfo"></p>
+                            <input th:placeholder="#{modal.change_name.placeholder}" type="text" class="form-control" id="changeNameName" oninput="checkNewName(this)">
+                        </div>
+                        <div style="text-align: center; display: none" id="changeNameFeedback"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{modal.close_button}"></button>
+                    <button id="changeNameButton" type="button" style="pointer-events: none" disabled onclick="changeName();" class="btn btn-primary" th:text="#{modal.change_name.modify_button}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org" th:fragment="welcome">
+    <!--/*@thymesVar id="uploadservice" type="java.lang.String"*/-->
+    <input id="uploadUrlService" type="hidden" th:value="${uploadservice}"/>
+    <!--/*@thymesVar id="downloadservice" type="java.lang.String"*/-->
+    <input id="downloadUrlService" type="hidden" th:value="${downloadservice}"/>
+    <!--/*@thymesVar id="jwt" type="java.lang.String"*/-->
+    <input id="jwt" type="hidden" th:value="${jwt}"/>
+    <!--/*@thymesVar id="filesByUser" type="java.lang.String"*/-->
+    <input id="filesByUser" type="hidden" th:value="${filesByUser}"/>
+    <!--/*@thymesVar id="foldersByUser" type="java.lang.String"*/-->
+    <input id="foldersByUser" type="hidden" th:value="${foldersByUser}"/>
+    <!--/*@thymesVar id="sumSizesByUser" type="java.lang.String"*/-->
+    <input id="sumSizesByUser" type="hidden" th:value="${sumSizesByUser}"/>
+    <!--/*@thymesVar id="sumSizesExcludingUser" type="java.lang.String"*/-->
+    <input id="sumSizesExcludingUser" type="hidden" th:value="${sumSizesExcludingUser}"/>
+    <!--/*@thymesVar id="system" type="java.lang.String"*/-->
+    <input id="system" type="hidden" th:value="${system}"/>
+    <!--/*@thymesVar id="totalSize" type="java.lang.String"*/-->
+    <input id="totalSize" type="hidden" th:value="${totalSize}"/>
+    <!--/*@thymesVar id="activeSince" type="java.lang.String"*/-->
+    <input id="activeSince" type="hidden" th:value="${activeSince}"/>
+    <!--/*@thymesVar id="roles" type="java.lang.String"*/-->
+    <input id="roles" type="hidden" th:value="${roles}"/>
+    <!--/*@thymesVar id="isDarkTheme" type="java.lang.String"*/-->
+    <input id="isDarkTheme" type="hidden" th:value="${isDarkTheme}"/>
+
+    <div class="bg-light" style="float: left; width: 30%; margin-left: 17.5%; margin-right: 2.5%">
+        <div style="margin-bottom: 20px">
+            <h4 class="text-dark" th:text="#{welcome.space}"></h4>
+        </div>
+        <div class="tableButtonsDiv">
+            <button type="button" class="btn btn-outline-primary tableButton" onclick="hideShow(0)" th:text="#{welcome.space.me}"></button>
+            <button type="button" class="btn btn-outline-warning tableButton" onclick="hideShow(1)" th:text="#{welcome.space.others}"></button>
+            <button type="button" class="btn btn-outline-secondary tableButton" onclick="hideShow(2)" th:text="#{welcome.space.system}"></button>
+            <button type="button" class="btn btn-outline-success tableButton" onclick="hideShow(3)" th:text="#{welcome.space.free}"></button>
+        </div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="bg-light" style="float: left; width: 30%; margin-right: 17.5%; margin-left: 2.5%">
+        <div style="margin-bottom: 20px">
+            <h4 class="text-dark" th:text="#{welcome.info}">Info</h4>
+        </div>
+        <div style="margin-left: 10%">
+            <p class="text-dark">
+                <i class="fas fa-calendar-alt infoBlue"></i><span th:text="' ' + #{welcome.info.active}"></span>&nbsp;:&nbsp;<span id="activeSinceText"></span>
+            </p>
+            <p class="text-dark">
+                <i class="fas fa-user-tag green"></i><span th:text="' ' + #{welcome.info.roles}"></span>&nbsp;:&nbsp;<span id="rolesText"></span>
+            </p>
+            <p class="text-dark">
+                <i class="fas fa-folder darkorange"></i><span th:text="' ' + #{welcome.info.folders}"></span>&nbsp;:&nbsp;<span id="foldersByUserText"></span>
+            </p>
+            <p class="text-dark">
+                <i class="fas fa-file dodgerblue"></i><span th:text="' ' + #{welcome.info.files}"></span>&nbsp;:&nbsp;<span id="filesByUserText"></span>
+            </p>
+        </div>
+    </div>
+</div>

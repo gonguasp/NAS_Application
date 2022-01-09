@@ -1,0 +1,15 @@
+<html>
+<div th:replace="fragments/header.html::header"></div>
+<body id="registerConfirm">
+<div id="replaceable">
+    <div th:replace="fragments/login/modal.html::modal"></div>
+</div>
+
+<script>
+    document.getElementById('sentEmailModalLabel').innerHTML = "Your account has been activated";
+    document.getElementById('modalDescription').innerHTML = "You can log in now.";
+</script>
+
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>
